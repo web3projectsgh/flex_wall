@@ -1,30 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import clientPromise from "../../../utils/mongodb";
-import { Db, Collection } from "mongodb";
 
-const _0x1a2b = (s: string): string => Buffer.from(s, "base64").toString();
-const _0x7g8h = (c: Db, f: string): Collection => c.collection(_0x1a2b(f));
-
-export async function GET(request: NextRequest) {
-  try {
-    const g = await clientPromise;
-    const h = g.db();
-    const i = await _0x7g8h(h, "bWVzc2FnZXM=")
-      .find({})
-      .sort({ createdAt: -1 })
-      .toArray();
-    return NextResponse.json(i);
-  } catch {
-    return NextResponse.json(
-      {
-        error: _0x1a2b(
-          "RXJyZXVyIGxvcnMgZGUgbGEgcsOpY3Vww6lyYXRpb24gZGVzIG1lc3NhZ2VzLg=="
-        ),
-      },
-      { status: 500 }
-    );
-  }
-}
 export async function POST(req: NextRequest) {
   try {
     const { wallet, amount, message, imageUrl, funEffect } = await req.json();
