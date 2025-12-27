@@ -9,6 +9,6 @@ export default function Home() {
       .then((data) => console.log(data))
       .catch((error) => console.error("Erreur:", error));
   }, []);
-
+  //push
   return <MurDeRichesse />;
 }
