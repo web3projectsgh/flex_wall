@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 export type ClassementUser = { wallet: string; score: number };
 
@@ -12,88 +13,77 @@ const Classement: React.FC<ClassementProps> = ({
   classementJour,
 }) => {
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="w-full max-w-4xl mx-auto rounded-3xl p-8 mb-8 text-white relative overflow-hidden"
       style={{
-        width: "100%",
-        maxWidth: "48rem",
-        margin: "0 auto",
-        borderRadius: "2rem",
-        boxShadow:
-          "0 8px 40px 0 rgba(51, 100, 180, 0.18), 0 1.5px 8px 0 rgba(51,100,180,0.10) inset",
-        padding: "2.5rem",
-        marginBottom: "2.5rem",
-        border: "1.5px solid #334155",
-        background:
-          "linear-gradient(135deg, rgba(24,34,54,0.92) 0%, rgba(40,60,110,0.82) 100%)",
-        backdropFilter: "blur(28px) saturate(1.7)",
-        position: "relative",
-        overflow: "hidden",
+        background: "rgba(255,255,255,0.06)",
+        backdropFilter: "blur(16px) saturate(1.2)",
+        WebkitBackdropFilter: "blur(16px) saturate(1.2)",
+        border: "1px solid rgba(255,255,255,0.2)",
+        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.37)",
       }}
     >
       {/* Reflet liquide glassmorphism */}
       <span
+        className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-70"
         style={{
-          position: "absolute",
-          top: "-30%",
-          left: "-20%",
-          width: "140%",
-          height: "80%",
           background:
-            "radial-gradient(ellipse at 60% 40%, rgba(60,120,255,0.22) 0%, rgba(24,34,54,0.18) 60%, transparent 100%)",
-          filter: "blur(38px)",
-          zIndex: 1,
-          pointerEvents: "none",
-          opacity: 0.7,
+            "radial-gradient(ellipse at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 70%)",
+          filter: "blur(40px)",
         }}
       />
-      <h2 className="text-3xl font-extrabold mb-6 text-center text-blue-900 dark:text-blue-100 drop-shadow relative z-10">
+      <motion.h2
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+        className="text-4xl font-extrabold mb-8 text-center drop-shadow-lg relative z-10"
+      >
         Leaderboard
-      </h2>
+      </motion.h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
         {/* Top Buyers */}
-        <div
+        <motion.div
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="rounded-2xl p-6 relative overflow-hidden"
           style={{
-            background: "rgba(24,34,54,0.92)",
-            borderRadius: "1.5rem",
-            boxShadow: "0 4px 24px 0 rgba(51, 100, 180, 0.13)",
-            padding: "1.5rem",
-            border: "1.5px solid #334155",
-            position: "relative",
-            overflow: "hidden",
-            backdropFilter: "blur(16px) saturate(1.3)",
+            background: "rgba(255,255,255,0.08)",
+            backdropFilter: "blur(12px) saturate(1.1)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            boxShadow: "0 4px 24px 0 rgba(31, 38, 135, 0.2)",
           }}
         >
           <span
+            className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-50"
             style={{
-              position: "absolute",
-              top: "-20%",
-              left: "-10%",
-              width: "120%",
-              height: "60%",
               background:
-                "radial-gradient(ellipse at 60% 40%, rgba(60,120,255,0.16) 0%, rgba(24,34,54,0.13) 60%, transparent 100%)",
-              filter: "blur(28px)",
-              zIndex: 1,
-              pointerEvents: "none",
-              opacity: 0.6,
+                "radial-gradient(ellipse at 60% 40%, rgba(255,255,255,0.05) 0%, transparent 60%)",
+              filter: "blur(30px)",
             }}
           />
-          <h3 className="text-lg font-bold text-blue-900 dark:text-blue-100 mb-3 flex items-center gap-2 relative z-10">
-            <span className="text-xl">🏆</span> Top Buyers
-            <span className="ml-2 px-2 py-0.5 rounded-full bg-blue-200 dark:bg-blue-800 text-xs font-bold text-blue-900 dark:text-white shadow-sm border border-blue-300 dark:border-blue-700">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2 relative z-10">
+            <span className="text-2xl">🏆</span> Top Buyers
+            <span className="ml-2 px-3 py-1 rounded-full bg-white/20 text-sm font-bold shadow-sm border border-white/30">
               All Time
             </span>
           </h3>
           {classementGlobal.length === 0 ? (
-            <p className="text-gray-400 text-center py-4">No buyers yet.</p>
+            <p className="text-white/70 text-center py-4">No buyers yet.</p>
           ) : (
-            <ol className="flex flex-col gap-1">
+            <ol className="flex flex-col gap-2">
               {classementGlobal.slice(0, 10).map((user, i) => (
-                <li
+                <motion.li
                   key={user.wallet}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-xl min-h-[44px] transition-all bg-white/60 dark:bg-zinc-900/60 border border-blue-100 dark:border-blue-800 shadow-sm relative z-10`}
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1, duration: 0.3 }}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/10 border border-white/20 shadow-sm relative z-10 hover:bg-white/15 transition-all"
                 >
-                  <span className="font-bold text-base shrink-0 w-7 text-center text-blue-900 dark:text-white">
+                  <span className="font-bold text-lg shrink-0 w-8 text-center">
                     {i === 0
                       ? "🥇"
                       : i === 1
@@ -102,94 +92,90 @@ const Classement: React.FC<ClassementProps> = ({
                       ? "🥉"
                       : `#${i + 1}`}
                   </span>
-                  <span className="font-mono text-base flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0 font-bold text-blue-900 dark:text-white">
+                  <span className="font-mono text-sm flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0 font-bold">
                     <span
-                      className="truncate max-w-[90px] sm:max-w-[120px] inline-block align-middle"
+                      className="truncate max-w-[100px] sm:max-w-[140px] inline-block align-middle"
                       title={user.wallet}
                     >
                       {user.wallet.slice(0, 6)}...{user.wallet.slice(-4)}
                     </span>
                   </span>
-                  <span className="ml-auto font-bold text-base flex items-center gap-1 text-blue-900 dark:text-white">
+                  <span className="ml-auto font-bold text-lg flex items-center gap-1">
                     {user.score.toLocaleString(undefined, {
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 4,
                     })}
-                    <span className="text-xs font-semibold ml-1">◎</span>
+                    <span className="text-sm font-semibold ml-1">◎</span>
                   </span>
-                </li>
+                </motion.li>
               ))}
             </ol>
           )}
-        </div>
+        </motion.div>
         {/* Daily Top */}
-        <div
+        <motion.div
+          initial={{ x: 20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="rounded-2xl p-6 relative overflow-hidden"
           style={{
-            background: "rgba(24,34,54,0.92)",
-            borderRadius: "1.5rem",
-            boxShadow: "0 4px 24px 0 rgba(51, 100, 180, 0.13)",
-            padding: "1.5rem",
-            border: "1.5px solid #334155",
-            position: "relative",
-            overflow: "hidden",
-            backdropFilter: "blur(16px) saturate(1.3)",
+            background: "rgba(255,255,255,0.08)",
+            backdropFilter: "blur(12px) saturate(1.1)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            boxShadow: "0 4px 24px 0 rgba(31, 38, 135, 0.2)",
           }}
         >
           <span
+            className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-50"
             style={{
-              position: "absolute",
-              top: "-20%",
-              left: "-10%",
-              width: "120%",
-              height: "60%",
               background:
-                "radial-gradient(ellipse at 60% 40%, rgba(60,255,220,0.13) 0%, rgba(24,34,54,0.13) 60%, transparent 100%)",
-              filter: "blur(28px)",
-              zIndex: 1,
-              pointerEvents: "none",
-              opacity: 0.6,
+                "radial-gradient(ellipse at 60% 40%, rgba(255,255,255,0.05) 0%, transparent 60%)",
+              filter: "blur(30px)",
             }}
           />
-          <h3 className="text-lg font-bold text-emerald-900 dark:text-emerald-100 mb-3 flex items-center gap-2 relative z-10">
-            <span className="text-xl">🌟</span> Daily Top
-            <span className="ml-2 px-2 py-0.5 rounded-full bg-emerald-200 dark:bg-emerald-800 text-xs font-bold text-emerald-900 dark:text-white shadow-sm border border-emerald-300 dark:border-emerald-700">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2 relative z-10">
+            <span className="text-2xl">🌟</span> Daily Top
+            <span className="ml-2 px-3 py-1 rounded-full bg-white/20 text-sm font-bold shadow-sm border border-white/30">
               Today
             </span>
           </h3>
           {classementJour.length === 0 ? (
-            <p className="text-gray-400 text-center py-4">No buyers today.</p>
+            <p className="text-white/70 text-center py-4">No buyers today.</p>
           ) : (
-            <ol className="flex flex-col gap-1">
+            <ol className="flex flex-col gap-2">
               {classementJour.slice(0, 10).map((user, i) => (
-                <li
+                <motion.li
                   key={user.wallet}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl min-h-[40px] transition-all bg-white/60 dark:bg-zinc-900/60 border border-emerald-100 dark:border-emerald-800 shadow-sm relative z-10`}
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 + i * 0.1, duration: 0.3 }}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl bg-white/10 border border-white/20 shadow-sm relative z-10 hover:bg-white/15 transition-all"
                 >
-                  <span className="font-bold text-base shrink-0 w-7 text-center text-emerald-900 dark:text-white">
+                  <span className="font-bold text-lg shrink-0 w-8 text-center">
                     {i === 0 ? "🥇" : `#${i + 1}`}
                   </span>
-                  <span className="font-mono text-base flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0 font-bold text-emerald-900 dark:text-white">
+                  <span className="font-mono text-sm flex flex-wrap items-center gap-x-2 gap-y-1 min-w-0 font-bold">
                     <span
-                      className="truncate max-w-[90px] sm:max-w-[120px] inline-block align-middle"
+                      className="truncate max-w-[100px] sm:max-w-[140px] inline-block align-middle"
                       title={user.wallet}
                     >
                       {user.wallet.slice(0, 6)}...{user.wallet.slice(-4)}
                     </span>
                   </span>
-                  <span className="ml-auto font-bold text-base flex items-center gap-1 text-emerald-900 dark:text-white">
+                  <span className="ml-auto font-bold text-lg flex items-center gap-1">
                     {user.score.toLocaleString(undefined, {
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 4,
                     })}
-                    <span className="text-xs font-semibold ml-1">◎</span>
+                    <span className="text-sm font-semibold ml-1">◎</span>
                   </span>
-                </li>
+                </motion.li>
               ))}
             </ol>
           )}
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -208,24 +208,33 @@ export default function FlexWallPage() {
   const { classementGlobal, classementJour } = getClassements(wall);
 
   return (
-    <div className="font-sans min-h-screen bg-gradient-to-br from-blue-100 via-white to-blue-200 dark:from-zinc-900 dark:via-zinc-950 dark:to-blue-950 flex flex-col">
+    <div
+      className="font-sans min-h-screen flex flex-col text-white"
+      style={{
+        background: "rgba(255,255,255,0.06)",
+        backdropFilter: "blur(16px) saturate(1.2)",
+        WebkitBackdropFilter: "blur(16px) saturate(1.2)",
+      }}
+    >
       <Header>
         {wallet && (
-          <button
-            className="ml-4 px-5 py-2 rounded-2xl font-bold text-blue-100 bg-white/60 dark:bg-zinc-800/60 border border-blue-200/40 dark:border-blue-900/30 shadow-md backdrop-blur-md transition-all duration-200 hover:scale-[1.07] hover:shadow-xl hover:bg-blue-50/80 dark:hover:bg-blue-900/60"
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="ml-4 px-5 py-2 rounded-2xl font-bold text-white bg-white/10 border border-white/30 shadow-md backdrop-blur-md transition-all duration-200 hover:bg-white/20"
             onClick={() => setModalOpen(true)}
           >
             Post on the FlexWall
-          </button>
+          </motion.button>
         )}
       </Header>
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col gap-4 w-full max-w-md mx-auto bg-white/80 dark:bg-zinc-900/80 p-6 rounded-2xl shadow-2xl border border-blue-100 dark:border-blue-900"
+          className="flex flex-col gap-4 w-full max-w-md mx-auto bg-white/10 p-6 rounded-2xl shadow-2xl border border-white/20 backdrop-blur-md text-white"
         >
-          <h2 className="text-2xl font-bold text-center mb-2 text-blue-700 dark:text-blue-300">
+          <h2 className="text-2xl font-bold text-center mb-2 text-white">
             Post on the FlexWall
           </h2>
           <label className="font-semibold">
@@ -236,13 +245,13 @@ export default function FlexWallPage() {
               step={0.0001}
               value={amount}
               onChange={(e) => setAmount(Number(e.target.value))}
-              className="block w-full mt-1 p-2 rounded border"
+              className="block w-full mt-1 p-2 rounded border border-white/30 bg-white/10 text-white placeholder-white/50"
               required
             />
           </label>
           <button
             type="button"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-60"
+            className="bg-white/20 hover:bg-white/30 text-white font-bold py-2 px-4 rounded disabled:opacity-60 border border-white/30"
             disabled={sending || amount <= 0 || !!txHash}
             onClick={handlePay}
           >
@@ -256,7 +265,7 @@ export default function FlexWallPage() {
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="block w-full mt-1 p-2 rounded border"
+              className="block w-full mt-1 p-2 rounded border border-white/30 bg-white/10 text-white placeholder-white/50"
               maxLength={200}
               required
               disabled={!txHash}
@@ -268,7 +277,7 @@ export default function FlexWallPage() {
               type="url"
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
-              className="block w-full mt-1 p-2 rounded border"
+              className="block w-full mt-1 p-2 rounded border border-white/30 bg-white/10 text-white placeholder-white/50"
               placeholder="https://..."
               disabled={!txHash}
             />
@@ -288,9 +297,9 @@ export default function FlexWallPage() {
             {sending ? "Sending..." : "Post on the FlexWall"}
           </button>
           {success && (
-            <div className="text-emerald-700 font-semibold">{success}</div>
+            <div className="text-emerald-400 font-semibold">{success}</div>
           )}
-          {error && <div className="text-red-600 font-semibold">{error}</div>}
+          {error && <div className="text-red-400 font-semibold">{error}</div>}
         </form>
       </Modal>
 
@@ -307,13 +316,13 @@ export default function FlexWallPage() {
           transition={{ duration: 0.7, delay: 0.1, ease: "easeOut" }}
         >
           <div className="w-full">
-            <h2 className="text-3xl font-bold mb-8 text-center text-blue-900 dark:text-blue-100 drop-shadow">
+            <h2 className="text-4xl font-extrabold mb-8 text-center drop-shadow-lg">
               FlexWall (Solana)
             </h2>
             {loadingWall ? (
-              <div>Loading wall...</div>
+              <div className="text-white/70">Loading wall...</div>
             ) : wall.length === 0 ? (
-              <div className="text-gray-500 text-center py-12 text-xl">
+              <div className="text-white/70 text-center py-12 text-xl">
                 No messages on the wall yet.
               </div>
             ) : (
@@ -357,7 +366,7 @@ function FunEffectSelector({
   if (available.length === 0) return null;
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-semibold">Fun effect unlocked:</label>
+      <label className="font-semibold text-white">Fun effect unlocked:</label>
       <div className="flex flex-wrap gap-2">
         {available.map((opt) => (
           <button
@@ -365,8 +374,8 @@ function FunEffectSelector({
             type="button"
             className={`px-3 py-2 rounded-xl text-lg font-bold border-2 transition shadow-sm ${
               funEffect === opt.value
-                ? "bg-blue-600 text-white border-blue-700"
-                : "bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 border-blue-200 dark:border-blue-800 hover:bg-blue-200 dark:hover:bg-blue-800"
+                ? "bg-white/30 text-white border-white/50"
+                : "bg-white/10 text-white border-white/30 hover:bg-white/20"
             }`}
             onClick={() => setFunEffect(opt.value)}
           >
@@ -435,54 +444,33 @@ function WallMessageCard({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.3, type: "spring" }}
+      className={`w-full min-h-[180px] max-h-[260px] rounded-xl border relative overflow-hidden flex flex-col gap-2 items-start justify-start p-3 cursor-default ${
+        isTop1 ? "border-cyan-400 bg-white/15" : "border-white/20 bg-white/10"
+      }`}
       style={{
-        width: "100%",
-        minHeight: 180,
-        maxHeight: 260,
-        borderRadius: "0.6rem",
-        border: isTop1 ? "2.5px solid #00FFD0" : "1.2px solid #334155",
-        background: isTop1
-          ? "linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%)"
-          : "linear-gradient(135deg, #1e293b 0%, #334155 100%)",
+        backdropFilter: "blur(8px) saturate(1.1)",
+        WebkitBackdropFilter: "blur(8px) saturate(1.1)",
         boxShadow: isTop1
-          ? "0 0 0 3px #00FFD0, 0 4px 16px 0 #00FFD055"
-          : "0 1px 6px 0 #222b3a22",
-        position: "relative",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        gap: "0.4rem",
-        alignItems: "flex-start",
-        justifyContent: "flex-start",
-        padding: "0.7rem 0.7rem 0.5rem 0.7rem",
-        cursor: "default",
+          ? "0 0 0 2px rgba(34, 211, 238, 0.5), 0 4px 16px 0 rgba(34, 211, 238, 0.2)"
+          : "0 4px 16px 0 rgba(255, 255, 255, 0.1)",
       }}
     >
       {isTop1 && (
-        <span
-          className="relative -top-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full bg-[#00FFD0] text-[#1e293b] font-bold shadow-lg z-20 select-none text-xs border border-[#fff]"
-          style={{ textShadow: "0 1px 6px #fff" }}
-        >
+        <span className="absolute -top-2 left-1/2 -translate-x-1/2 px-2 py-1 rounded-full bg-cyan-400 text-black font-bold shadow-lg z-20 select-none text-xs border border-white">
           👑 TOP 1 OF THE WALL
         </span>
       )}
-      <div className="flex items-center gap-2 mb-1 min-w-0 relative z-10">
+      <div className="flex items-center gap-2 mb-1 min-w-0 relative z-10 w-full">
         <a
           href={solscanAddressUrl(msg.wallet)}
           target="_blank"
           rel="noopener noreferrer"
           title={msg.wallet}
-          className="font-mono text-xs text-blue-900 dark:text-blue-100 bg-white/80 dark:bg-zinc-900/80 px-2 py-1 rounded truncate max-w-[120px] inline-block"
+          className="font-mono text-xs text-white bg-white/20 px-2 py-1 rounded truncate max-w-[120px] inline-block border border-white/30"
         >
           {msg.wallet.slice(0, 6)}...{msg.wallet.slice(-4)}
         </a>
-        <span
-          className={`ml-auto font-bold text-base flex items-center gap-1 ${
-            isTop1
-              ? "text-[#1e293b] drop-shadow-lg"
-              : "text-blue-100 dark:text-blue-100"
-          }`}
-        >
+        <span className="ml-auto font-bold text-base flex items-center gap-1 text-white">
           {msg.amount.toLocaleString(undefined, {
             minimumFractionDigits: 0,
             maximumFractionDigits: 4,
@@ -490,42 +478,33 @@ function WallMessageCard({
           <span className="text-xs font-semibold ml-1">◎</span>
         </span>
       </div>
-      <div
-        style={{
-          color: isTop1 ? "#1e293b" : "#dbeafe",
-          fontWeight: 600,
-          wordBreak: "break-word",
-          zIndex: 10,
-          fontSize: "0.93em",
-          marginBottom: msg.imageUrl ? 8 : 0,
-        }}
-      >
+      <div className="text-white font-semibold word-break break-word z-10 text-sm mb-2 flex-1">
         {msg.message}
       </div>
       {imageSrc && (
         <Image
           src={imageSrc}
           alt="Wall image"
-          className="rounded-xl border-2 border-blue-200 shadow-lg"
+          className="rounded-xl border-2 border-white/30 shadow-lg"
           width={180}
           height={180}
           style={{
             objectFit: "contain",
             maxHeight: 180,
             maxWidth: "90%",
-            background: "#fff8",
+            background: "rgba(255,255,255,0.1)",
             padding: "0.3rem",
           }}
           unoptimized
         />
       )}
-      <div className="flex items-center justify-between mt-auto text-xs text-gray-400 relative z-10">
+      <div className="flex items-center justify-between mt-auto text-xs text-white/70 relative z-10 w-full">
         {msg.txHash ? (
           <a
             href={solscanTxUrl(msg.txHash)}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline hover:text-blue-600"
+            className="underline hover:text-cyan-400"
           >
             {msg.txHash.slice(0, 12)}...
           </a>
